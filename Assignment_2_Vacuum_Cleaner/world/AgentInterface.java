@@ -1,7 +1,7 @@
 package world;
 
 public interface AgentInterface {
-	
+
 	public void MoveLeft();
 	public void MoveRight();
 	public void MoveDown();
