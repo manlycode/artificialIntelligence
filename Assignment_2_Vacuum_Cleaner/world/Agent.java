@@ -65,8 +65,27 @@ public class Agent implements AgentInterface {
 	// when it hits the end of the world or an obstacle
 	public void GetNewDirection() {
 		Random randomInt = new Random();
-		int ran = randomInt.nextInt(env.width) - 1;
-		if()
+		int ran = randomInt.nextInt(8) + 1;
+
+		switch (ran) {
+			case 1: MoveLeft();
+							break;
+			case 2: MoveRight();
+							break;
+			case 3: MoveDown();
+							break;
+			case 4: MoveUp();
+							break;
+			case 5: MoveLeftUp();
+							break;
+			case 6: MoveLeftDown();
+							break;
+			case 7: MoveRightUp();
+							break;
+			case 8: MoveRightDown();
+							break;
+		}
+
 	}
 	// P is for path, O is for obstacle, D is for dirt
 	// If value at position of vacuum is D, call
@@ -82,11 +101,17 @@ public class Agent implements AgentInterface {
 	public void CleanDirt(String [][] world) {
 		world[x][y] = "P";
 		env.RemoveDirt();
+		performance += 15;
 	}
 	// Not sure what this is for yet.
 	public void Run(String [][] world) {
 		while(env.numOfDirtyTiles != 0 && battery != 0) {
+			CheckForDirt(world);
 			GetNewDirection();
+		}
+		if(battery == 0) {
+			System.out.println("The agent ran out of battery before");
+			System.out.println("cleaning all the tiles...");
 		}
 	}
 	// Print current state of vacuum world?
@@ -101,6 +126,7 @@ public class Agent implements AgentInterface {
 
 	public void BatteryReduction() {
 		battery--;
+		performance -= 2;
 	}
 
 }
