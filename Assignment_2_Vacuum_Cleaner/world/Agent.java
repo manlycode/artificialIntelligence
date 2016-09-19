@@ -5,15 +5,14 @@ public class Agent implements AgentInterface {
 
 	private int x = 0; 	// Agent's
 	private int y = 0;
-	private Environment environment;
-	private int battery = 0;
+	private Environment env;
+	private int battery = 50;
 	private int performance = 0;
-
 
 	public Agent(int x, int y, Environment env){
 		this.x = x;
 		this.y = y;
-		this.environment = env;
+		this.env = env;
 		Run(env.world);
 	}
 
@@ -60,11 +59,14 @@ public class Agent implements AgentInterface {
 		x++;
 		y++;
 		BatteryReduction();
+
 	}
-	//Use this method to generate movement logic??
+	// Use this method to get the agent to change direction,
+	// when it hits the end of the world or an obstacle
 	public void GetNewDirection() {
-
-
+		Random randomInt = new Random();
+		int ran = randomInt.nextInt(env.width) - 1;
+		if()
 	}
 	// P is for path, O is for obstacle, D is for dirt
 	// If value at position of vacuum is D, call
@@ -79,11 +81,13 @@ public class Agent implements AgentInterface {
 
 	public void CleanDirt(String [][] world) {
 		world[x][y] = "P";
-		environment.RemoveDirt();
+		env.RemoveDirt();
 	}
 	// Not sure what this is for yet.
 	public void Run(String [][] world) {
-
+		while(env.numOfDirtyTiles != 0 && battery != 0) {
+			GetNewDirection();
+		}
 	}
 	// Print current state of vacuum world?
 	public void PrintWorld(String [][] world) {
