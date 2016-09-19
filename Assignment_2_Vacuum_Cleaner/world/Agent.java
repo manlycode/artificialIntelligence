@@ -18,47 +18,63 @@ public class Agent implements AgentInterface {
 
 	// Your code here ....
 	public void MoveLeft() {
-		x--;
-		BatteryReduction();
+      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+		   x--;
+		   BatteryReduction();
+      } else return;
 	}
 
 	public void MoveRight() {
-		x++;
-		BatteryReduction();
+      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+   		x++;
+   		BatteryReduction();
+      } else return;
 	}
 
 	public void MoveDown() {
-		y++;
-		BatteryReduction();
+      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+		   y++;
+	   	BatteryReduction();
+      } else return;
 	}
 
 	public void MoveUp() {
-		y--;
-		BatteryReduction();
+      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+   		y--;
+   		BatteryReduction();
+      } else return;
 	}
 
 	public void MoveLeftUp() {
-		x--;
-		y--;
-		BatteryReduction();
+      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+   		x--;
+   		y--;
+   		BatteryReduction();
+      } else return;
 	}
 
 	public void MoveLeftDown() {
-		x--;
-		y++;
-		BatteryReduction();
+      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+   		x--;
+   		y++;
+   		BatteryReduction();
+      } else return;
 	}
 
 	public void MoveRightUp() {
-		x++;
-		y--;
-		BatteryReduction();
+      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+	   	x++;
+	   	y--;
+	   	BatteryReduction();
+      } else return;
 	}
 
 	public void MoveRightDown() {
-		x++;
-		y++;
-		BatteryReduction();
+      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+   		x++;
+   		y++;
+   		BatteryReduction();
+      } else return;
 
 	}
 	// Use this method to get the agent to change direction,
@@ -67,25 +83,24 @@ public class Agent implements AgentInterface {
 		Random randomInt = new Random();
 		int ran = randomInt.nextInt(8) + 1;
 
-		switch (ran) {
-			case 1: MoveLeft();
-							break;
-			case 2: MoveRight();
-							break;
-			case 3: MoveDown();
-							break;
-			case 4: MoveUp();
-							break;
-			case 5: MoveLeftUp();
-							break;
-			case 6: MoveLeftDown();
-							break;
-			case 7: MoveRightUp();
-							break;
-			case 8: MoveRightDown();
-							break;
-		}
-
+			switch (ran) {
+				case 1: MoveLeft();
+								break;
+				case 2: MoveRight();
+								break;
+				case 3: MoveDown();
+								break;
+				case 4: MoveUp();
+								break;
+				case 5: MoveLeftUp();
+								break;
+				case 6: MoveLeftDown();
+								break;
+				case 7: MoveRightUp();
+								break;
+				case 8: MoveRightDown();
+								break;
+         }
 	}
 	// P is for path, O is for obstacle, D is for dirt
 	// If value at position of vacuum is D, call
