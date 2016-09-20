@@ -18,35 +18,40 @@ public class Agent implements AgentInterface {
 
 	// Your code here ....
 	public void MoveLeft() {
-      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
+		  if (x == 0) return;
+      if (x > 0) {
 		   x--;
 		   BatteryReduction();
       } else return;
 	}
 
 	public void MoveRight() {
-      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
+		  if (x == 5) return;
+      if (x < 5) {
    		x++;
    		BatteryReduction();
       } else return;
 	}
 
 	public void MoveDown() {
-      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
+      if (y == 5) return;
+      if (y < 5) {
 		   y++;
 	   	BatteryReduction();
       } else return;
 	}
 
 	public void MoveUp() {
-      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
+		  if (y == 0) return;
+      if (y > 0) {
    		y--;
    		BatteryReduction();
       } else return;
 	}
 
 	public void MoveLeftUp() {
-      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
+		  if (x == 0 && y == 0) return;
+      if (x > 0 && y > 0) {
    		x--;
    		y--;
    		BatteryReduction();
@@ -54,7 +59,8 @@ public class Agent implements AgentInterface {
 	}
 
 	public void MoveLeftDown() {
-      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
+			if (x == 0 && y == 5) return;
+      if ((y< env.height) && (x > 0)) {
    		x--;
    		y++;
    		BatteryReduction();
@@ -62,7 +68,8 @@ public class Agent implements AgentInterface {
 	}
 
 	public void MoveRightUp() {
-      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
+      if (x == 5 && y == 0) return;
+			if ((x < env.width) && (y > 0)) {
 	   	x++;
 	   	y--;
 	   	BatteryReduction();
@@ -70,7 +77,8 @@ public class Agent implements AgentInterface {
 	}
 
 	public void MoveRightDown() {
-      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
+			if (x == 5 && y == 5) return;
+      if ((x < env.width && y < env.height)) {
    		x++;
    		y++;
    		BatteryReduction();
@@ -79,7 +87,7 @@ public class Agent implements AgentInterface {
 	}
 	// Use this method to get the agent to change direction,
 	// when it hits the end of the world or an obstacle
-	public void GetNewDirection() {
+	public void GetNewDirection() throws ArrayIndexOutOfBoundsException{
 		Random randomInt = new Random();
 		int ran = randomInt.nextInt(8) + 1;
 
@@ -107,7 +115,6 @@ public class Agent implements AgentInterface {
 	// CleanDirt and return true, else return false
 	public boolean CheckForDirt(String [][] world) {
 		if(world[x][y].equals("D")) {
-			CleanDirt(world);
 			return true;
 		}
 		return false;
@@ -120,10 +127,12 @@ public class Agent implements AgentInterface {
 	}
 	// Not sure what this is for yet.
 	public void Run(String [][] world) {
-		while(battery != 0) {
-         PrintWorld(world);
-         System.out.println();
-			CheckForDirt(world);
+		while(battery != 0 && env.getNumberOfDirtyTiles() != 0) {
+      PrintWorld(env.world);
+      System.out.println();
+			if(CheckForDirt(env.world)) {
+				CleanDirt(env.world);
+			}
 			GetNewDirection();
 		}
 		if(battery == 0) {
@@ -133,9 +142,9 @@ public class Agent implements AgentInterface {
 	}
 	// Print current state of vacuum world?
 	public void PrintWorld(String [][] world) {
-		for(int i = 0; i < world.length; i++) {
-			for(int j = 0; j < world.length; j++) {
-				System.out.print(world[i][j]);
+		for(int i = 0; i < env.world.length; i++) {
+			for(int j = 0; j < env.world.length; j++) {
+				System.out.print(env.world[i][j]);
 			}
 				System.out.println();
 		}
