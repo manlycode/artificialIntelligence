@@ -18,35 +18,35 @@ public class Agent implements AgentInterface {
 
 	// Your code here ....
 	public void MoveLeft() {
-      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
 		   x--;
 		   BatteryReduction();
       } else return;
 	}
 
 	public void MoveRight() {
-      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
    		x++;
    		BatteryReduction();
       } else return;
 	}
 
 	public void MoveDown() {
-      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
 		   y++;
 	   	BatteryReduction();
       } else return;
 	}
 
 	public void MoveUp() {
-      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
    		y--;
    		BatteryReduction();
       } else return;
 	}
 
 	public void MoveLeftUp() {
-      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
    		x--;
    		y--;
    		BatteryReduction();
@@ -54,7 +54,7 @@ public class Agent implements AgentInterface {
 	}
 
 	public void MoveLeftDown() {
-      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
    		x--;
    		y++;
    		BatteryReduction();
@@ -62,7 +62,7 @@ public class Agent implements AgentInterface {
 	}
 
 	public void MoveRightUp() {
-      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
 	   	x++;
 	   	y--;
 	   	BatteryReduction();
@@ -70,7 +70,7 @@ public class Agent implements AgentInterface {
 	}
 
 	public void MoveRightDown() {
-      if ((x < env.width && y < env.height) && (x >= 0 && y >= 0)) {
+      if ((x < env.width && y < env.height) && (x > 0 && y > 0)) {
    		x++;
    		y++;
    		BatteryReduction();
@@ -120,7 +120,9 @@ public class Agent implements AgentInterface {
 	}
 	// Not sure what this is for yet.
 	public void Run(String [][] world) {
-		while(env.numOfDirtyTiles != 0 && battery != 0) {
+		while(battery != 0) {
+         PrintWorld(world);
+         System.out.println();
 			CheckForDirt(world);
 			GetNewDirection();
 		}
@@ -137,6 +139,14 @@ public class Agent implements AgentInterface {
 			}
 				System.out.println();
 		}
+	}
+
+	public boolean withinBoundsMin(int x, int y) {
+      return false;
+	}
+
+	public boolean withinBoundsMax(int x, int y) {
+      return false;
 	}
 
 	public void BatteryReduction() {
