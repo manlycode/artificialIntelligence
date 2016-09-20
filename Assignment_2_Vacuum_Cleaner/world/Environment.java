@@ -60,8 +60,7 @@ public class Environment {
 	}
 	
 	public int getNumberOfDirtyTiles(){
-
 		return numOfDirtyTiles;
 	}
-	
+
 }
